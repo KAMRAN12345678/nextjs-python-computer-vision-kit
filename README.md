@@ -96,6 +96,7 @@ npm run dev:down
 npm run api:types
 npm run check:contract
 npm run check:images
+npm run check:secrets
 npm run check:workflows
 npm run check
 ```
@@ -112,6 +113,8 @@ The root check runs:
 - backend `compileall`
 
 `check:images` is separate and intended for environments where a Docker daemon is available.
+
+`check:secrets` scans tracked git content with a pinned `gitleaks` version via Go.
 
 `check:workflows` lints `.github/workflows/` with a pinned `actionlint` version via Go.
 

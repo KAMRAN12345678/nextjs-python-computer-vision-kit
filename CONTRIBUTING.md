@@ -75,6 +75,18 @@ If Go is available locally, you can also lint GitHub Actions workflows:
 npm run check:workflows
 ```
 
+If Go is available locally, you can also scan tracked git content for secrets:
+
+```bash
+npm run check:secrets
+```
+
+For a pre-commit style check on staged content, run:
+
+```bash
+npm run check:secrets -- --staged
+```
+
 ## Changing the API Contract
 
 If you modify request or response shapes:
