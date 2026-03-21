@@ -9,6 +9,7 @@ It gives you a polished upload-to-inference UI, a typed OpenAPI contract, CPU-fr
   <a href="#screenshots">Screenshots</a> ·
   <a href="#what-you-get">What you get</a> ·
   <a href="./CONTRIBUTING.md">Contributing</a> ·
+  <a href="./SECURITY.md">Security</a> ·
   <a href="./soon.md">Roadmap</a>
 </p>
 
@@ -71,6 +72,7 @@ These pipelines are intentionally lightweight. They prove the repo shape and dev
 - `docs/`: OpenAPI contract and screenshot assets
 - `scripts/`: root development and verification commands
 - `.github/`: template CI workflow
+- `SECURITY.md`: vulnerability reporting guidance
 
 ## Quick Start
 
