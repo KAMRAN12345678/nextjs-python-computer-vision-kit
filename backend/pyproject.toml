@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "nextjs-python-computer-vision-kit-backend"
 version = "0.1.0"
 description = "FastAPI backend for the computer vision starter kit."
+license = "MIT"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
