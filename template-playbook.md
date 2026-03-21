@@ -53,6 +53,7 @@ If a template only has code and no repo workflow, it is usually still a prototyp
 - label sync
 - publish workflow
 - provenance attestations for published artifacts when possible
+- attach SBOMs to releases when you publish installable artifacts or images
 - release smoke test
 
 ### Repo Governance
@@ -161,6 +162,7 @@ If you want the version that scales better for open source or long-term reuse, a
 - dependency licenses should be reportable without manual digging
 - SBOMs should be generated for source trees or release artifacts when supply-chain visibility matters
 - published artifacts should have provenance attestations when the platform supports them
+- release notes should tell consumers how to verify what you published
 - release steps should be automated
 - docs should explain maintainer flow, not just user setup
 

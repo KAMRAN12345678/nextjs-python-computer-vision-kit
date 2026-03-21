@@ -177,6 +177,7 @@ What it covers here:
 - tag-triggered release workflow
 - GHCR publishing
 - build-provenance attestations for published container images
+- attached SBOM release assets for published source and runtime artifacts
 - release smoke test against published images
 - synced repository labels
 
@@ -192,6 +193,7 @@ Generic takeaway:
 - if the repo is public and meant to last, release automation is worth it
 - release smoke tests are especially valuable because they test the thing users actually consume
 - provenance attestations strengthen trust in published artifacts without requiring manual signing steps
+- attaching SBOMs directly to releases makes supply-chain metadata easier for downstream users to consume
 
 ### 7. Repo Governance and Maintainer UX
 
