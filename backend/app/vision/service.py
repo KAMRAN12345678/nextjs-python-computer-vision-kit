@@ -11,8 +11,8 @@ from app.schemas import (
     Detection,
     ImageMetadata,
     Metric,
-    PolygonPoint,
     PipelineSummary,
+    PolygonPoint,
     SegmentationRegion,
 )
 from app.vision.pipelines import PipelineDefinition
@@ -43,6 +43,40 @@ def _contour_to_polygon(contour: np.ndarray) -> list[PolygonPoint]:
         PolygonPoint(x=int(point[0][0]), y=int(point[0][1]))
         for point in polygon[:24]
     ]
+
+
+def _partition_significant_contours(
+    contours: list[np.ndarray],
+    image_area: int,
+) -> tuple[list[np.ndarray], list[np.ndarray]]:
+    significant: list[np.ndarray] = []
+    near_full_frame: list[np.ndarray] = []
+
+    for contour in contours:
+        area_ratio = cv2.contourArea(contour) / image_area
+        if area_ratio < 0.02:
+            continue
+
+        x, y, width, height = cv2.boundingRect(contour)
+        box_area_ratio = (width * height) / image_area
+        if area_ratio >= 0.9 or box_area_ratio >= 0.94:
+            near_full_frame.append(contour)
+            continue
+
+        significant.append(contour)
+
+    return significant, near_full_frame
+
+
+def _select_significant_contours(
+    contours: list[np.ndarray],
+    image_area: int,
+) -> list[np.ndarray]:
+    significant, near_full_frame = _partition_significant_contours(
+        contours,
+        image_area,
+    )
+    return significant or near_full_frame[:1]
 
 
 def _starter_detection(image: np.ndarray) -> tuple[list[dict], list[dict], list[dict]]:
@@ -151,6 +185,7 @@ def _foreground_segmentation(
 
     best_mask = thresholded
     best_score = -1.0
+    best_has_non_full_contours = False
 
     for candidate in candidates:
         cleaned = cv2.morphologyEx(
@@ -158,26 +193,35 @@ def _foreground_segmentation(
             cv2.MORPH_OPEN,
             np.ones((5, 5), dtype=np.uint8),
         )
-        contours, _ = cv2.findContours(
+        raw_contours, _ = cv2.findContours(
             cleaned,
             cv2.RETR_EXTERNAL,
             cv2.CHAIN_APPROX_SIMPLE,
         )
-        significant = [
-            contour
-            for contour in contours
-            if cv2.contourArea(contour) / image_area >= 0.02
-        ]
-        score = sum(cv2.contourArea(contour) for contour in significant) / image_area
-        if score > best_score:
+        significant, near_full_frame = _partition_significant_contours(
+            raw_contours,
+            image_area,
+        )
+        candidate_contours = significant or near_full_frame[:1]
+        has_non_full_contours = bool(significant)
+        score = (
+            sum(cv2.contourArea(contour) for contour in candidate_contours) / image_area
+        )
+        if (
+            has_non_full_contours and not best_has_non_full_contours
+        ) or (
+            has_non_full_contours == best_has_non_full_contours and score > best_score
+        ):
             best_score = score
             best_mask = cleaned
+            best_has_non_full_contours = has_non_full_contours
 
-    contours, _ = cv2.findContours(
+    raw_contours, _ = cv2.findContours(
         best_mask,
         cv2.RETR_EXTERNAL,
         cv2.CHAIN_APPROX_SIMPLE,
     )
+    contours = _select_significant_contours(raw_contours, image_area)
 
     detections = []
     segmentations = []
@@ -242,7 +286,10 @@ PIPELINE_REGISTRY: dict[str, PipelineDefinition] = {
     "starter-detection": PipelineDefinition(
         id="starter-detection",
         name="Starter Detection",
-        summary="Detection-first sample pipeline that returns object-style boxes and confidence scores.",
+        summary=(
+            "Detection-first sample pipeline that returns object-style boxes "
+            "and confidence scores."
+        ),
         tags=["detection", "default", "cpu"],
         runtime="opencv-cpu",
         sample_outputs=["object boxes", "confidence scores", "coverage metrics"],
@@ -251,7 +298,10 @@ PIPELINE_REGISTRY: dict[str, PipelineDefinition] = {
     "document-layout": PipelineDefinition(
         id="document-layout",
         name="Document Layout",
-        summary="Document-oriented box extraction for capture, scanning, and kiosk workflows.",
+        summary=(
+            "Document-oriented box extraction for capture, scanning, and kiosk "
+            "workflows."
+        ),
         tags=["detection", "document", "cpu"],
         runtime="opencv-cpu",
         sample_outputs=["quadrilateral candidates", "layout blocks"],
@@ -260,7 +310,10 @@ PIPELINE_REGISTRY: dict[str, PipelineDefinition] = {
     "foreground-segmentation": PipelineDefinition(
         id="foreground-segmentation",
         name="Foreground Segmentation",
-        summary="Segmentation extension pipeline that returns region polygons plus detection-style boxes.",
+        summary=(
+            "Segmentation extension pipeline that returns region polygons plus "
+            "detection-style boxes."
+        ),
         tags=["segmentation", "extension", "cpu"],
         runtime="opencv-cpu",
         sample_outputs=["region polygons", "mask coverage", "derived boxes"],
@@ -269,7 +322,10 @@ PIPELINE_REGISTRY: dict[str, PipelineDefinition] = {
     "dominant-color": PipelineDefinition(
         id="dominant-color",
         name="Dominant Color",
-        summary="Metrics-only extension pipeline for quality and image analytics workflows.",
+        summary=(
+            "Metrics-only extension pipeline for quality and image analytics "
+            "workflows."
+        ),
         tags=["analytics", "extension", "cpu"],
         runtime="opencv-cpu",
         sample_outputs=["channel metrics", "brightness"],

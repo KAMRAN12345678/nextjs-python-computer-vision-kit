@@ -36,6 +36,11 @@ const commands = [
   {
     cwd: backendDir,
     command: backendPython,
+    args: ["-m", "ruff", "check", "."],
+  },
+  {
+    cwd: backendDir,
+    command: backendPython,
     args: ["-m", "pytest"],
   },
   {

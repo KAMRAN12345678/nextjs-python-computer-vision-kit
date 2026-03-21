@@ -103,6 +103,7 @@ The root check runs:
 - frontend lint
 - frontend typecheck
 - frontend production build
+- backend Ruff lint
 - backend `pytest`
 - backend `compileall`
 
