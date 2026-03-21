@@ -48,50 +48,63 @@ function writeReport(filename, content) {
   writeFileSync(outputPath, normalized, "utf8");
 }
 
+function summarizeNpmLicenses(rawJson) {
+  const data = JSON.parse(rawJson);
+  const counts = new Map();
+
+  for (const item of Object.values(data)) {
+    const license = item.licenses ?? "UNKNOWN";
+    counts.set(license, (counts.get(license) ?? 0) + 1);
+  }
+
+  return [...counts.entries()]
+    .sort((left, right) => {
+      if (right[1] !== left[1]) {
+        return right[1] - left[1];
+      }
+
+      return left[0].localeCompare(right[0]);
+    })
+    .map(([license, count]) => `${count.toString().padStart(3, " ")}  ${license}`)
+    .join("\n");
+}
+
 const backendPython = resolvePythonCommand(backendDir);
 
 rmSync(reportDir, { recursive: true, force: true });
 mkdirSync(reportDir, { recursive: true });
 
-writeReport(
-  "root-npm.json",
-  runAndCapture(
-    "npx",
-    [
-      "--yes",
-      npmLicenseTool,
-      "--json",
-      "--relativeLicensePath",
-      "--relativeModulePath",
-    ],
-    root,
-  ),
+const rootNpmJson = runAndCapture(
+  "npx",
+  [
+    "--yes",
+    npmLicenseTool,
+    "--json",
+    "--excludePrivatePackages",
+    "--relativeLicensePath",
+    "--relativeModulePath",
+  ],
+  root,
 );
 
-writeReport(
-  "root-npm-summary.txt",
-  runAndCapture("npx", ["--yes", npmLicenseTool, "--summary"], root),
+writeReport("root-npm.json", rootNpmJson);
+writeReport("root-npm-summary.txt", summarizeNpmLicenses(rootNpmJson));
+
+const frontendNpmJson = runAndCapture(
+  "npx",
+  [
+    "--yes",
+    npmLicenseTool,
+    "--json",
+    "--excludePrivatePackages",
+    "--relativeLicensePath",
+    "--relativeModulePath",
+  ],
+  frontendDir,
 );
 
-writeReport(
-  "frontend-npm.json",
-  runAndCapture(
-    "npx",
-    [
-      "--yes",
-      npmLicenseTool,
-      "--json",
-      "--relativeLicensePath",
-      "--relativeModulePath",
-    ],
-    frontendDir,
-  ),
-);
-
-writeReport(
-  "frontend-npm-summary.txt",
-  runAndCapture("npx", ["--yes", npmLicenseTool, "--summary"], frontendDir),
-);
+writeReport("frontend-npm.json", frontendNpmJson);
+writeReport("frontend-npm-summary.txt", summarizeNpmLicenses(frontendNpmJson));
 
 writeReport(
   "backend-python.json",

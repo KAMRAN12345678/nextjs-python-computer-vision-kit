@@ -127,6 +127,8 @@ Pull requests also run GitHub dependency review so new vulnerable dependency cha
 
 A separate GitHub workflow generates license-report artifacts for the root workspace, frontend workspace, and backend Python environment.
 
+The dependency-review config also keeps a conservative allowlist of licenses already present in the current dependency tree, so tightening policy does not start by breaking routine updates.
+
 ## Releases
 
 - Release Drafter keeps a draft release updated from merged pull requests on `main` and can auto-label incoming pull requests by path.

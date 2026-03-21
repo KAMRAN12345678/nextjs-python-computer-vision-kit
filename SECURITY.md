@@ -34,6 +34,8 @@ The repository also uses automated scanning to help catch common security issues
 - GitHub dependency review on pull requests for newly introduced vulnerable dependency changes
 - GitHub license-report artifacts for npm and Python dependency inventories
 
+Dependency review is also configured with an allowlist that matches the current dependency tree, so changes that introduce new license types are surfaced deliberately instead of silently drifting in.
+
 Those checks do not replace private disclosure. If you believe a vulnerability is real or
 exploitable, please still report it through a private advisory.
 
