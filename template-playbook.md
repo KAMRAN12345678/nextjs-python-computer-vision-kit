@@ -47,13 +47,17 @@ Build the second layer early, not after the repo gets messy.
 - `README.md`
 - `CONTRIBUTING.md`
 - `SECURITY.md`
+- `CODE_OF_CONDUCT.md` for public/community-facing templates
+- `LICENSE` for public templates
 - `AGENTS.md` or equivalent internal guidance
+- tool-specific agent guidance only if you actively maintain it
 - short roadmap file like `soon.md`
 
 ### Root Commands
 
 - `dev`
 - `check`
+- `e2e` if the repo ships real browser or full-stack user flows
 - `check:contract` if generated artifacts exist
 - `check:images` if the repo ships deployable containers
 - `check:workflows`
@@ -68,15 +72,17 @@ Build the second layer early, not after the repo gets messy.
 - license reporting when dependency visibility matters
 - SBOM generation for source or publishable artifacts when relevant
 - app verification
+- browser E2E or integration coverage when the template markets real user flows
 - cross-platform check if relevant
 - packaging or Docker build check if relevant
 
 ### Release Layer
 
-- release drafter
+- release drafter or release-please
 - semver labels
 - label sync
 - publish workflow
+- managed changelog and version files if your release tool owns them
 - provenance attestations for published artifacts when possible
 - attach SBOMs to releases when you publish installable artifacts or images
 - release smoke test
@@ -113,6 +119,8 @@ Generic takeaway:
 - every serious starter should have a contributor guide
 - every serious starter should have an internal or agent-facing rules file
 - every public starter should have a security reporting path
+- every public starter should usually ship a code of conduct and explicit license
+- tool-specific AI guidance should be optional and maintained, not sprayed everywhere by default
 
 ### Root Script Layer
 
@@ -120,6 +128,7 @@ Keep:
 
 - `scripts/dev.mjs`
 - `scripts/check.mjs`
+- `scripts/e2e.mjs`
 - `scripts/check-contract-drift.mjs`
 - `scripts/check-docker-builds.mjs`
 - `scripts/check-release-smoke.mjs`
@@ -139,6 +148,7 @@ Generic takeaway:
 
 - keep a root `dev` command
 - keep a root `check` command
+- add a root `e2e` command when the product story depends on real user flows
 - add small focused helper scripts instead of giant shell blobs in workflows
 - prefer reusable scripts that can run locally and in CI
 
@@ -229,8 +239,10 @@ What it should cover:
 - draft releases from merged PRs
 - path-based autolabeling
 - semver bump guidance through labels
-- tag-triggered release workflow
+- one clear release spine such as release-please or draft-plus-publish
+- tag-triggered release workflow or release PR merge flow
 - package or image publishing
+- managed changelog and version files when the release tool owns them
 - provenance attestations for published artifacts
 - attached SBOM release assets for published source and runtime artifacts
 - release smoke test against published artifacts
@@ -246,6 +258,7 @@ Why it matters:
 Generic takeaway:
 
 - if the repo is public and meant to last, release automation is worth it
+- pick one release automation path and document it clearly instead of mixing multiple half-systems
 - release smoke tests are especially valuable because they test the thing users actually consume
 - provenance attestations strengthen trust in published artifacts without requiring manual signing steps
 - attaching SBOMs directly to releases makes supply-chain metadata easier for downstream users to consume
@@ -325,6 +338,25 @@ Generic takeaway:
 
 - if a repo relies on Actions, lint the workflows
 
+### Browser E2E Or Full-Stack Smoke Coverage
+
+Keep when relevant:
+
+- `scripts/e2e.mjs`
+- browser smoke workflow
+- stable seeded test account or fixture data
+
+Why it matters:
+
+- verifies real user journeys before release, not just units and builds
+- catches auth, routing, startup, and environment-wiring regressions
+- makes a public starter feel much more trustworthy
+
+Generic takeaway:
+
+- if the template markets login, dashboard, forms, or other full-stack flows, ship at least one browser E2E smoke path
+- keep it focused on stable happy-path journeys rather than UI trivia
+
 ### Post-Release Smoke Testing
 
 Keep when relevant:
@@ -390,6 +422,8 @@ For a strong public starter, this is a good baseline:
 README.md
 CONTRIBUTING.md
 SECURITY.md
+CODE_OF_CONDUCT.md
+LICENSE
 AGENTS.md
 soon.md
 .github/CODEOWNERS
@@ -410,6 +444,7 @@ soon.md
 .github/workflows/codeql.yml
 scripts/dev.mjs
 scripts/check.mjs
+scripts/e2e.mjs
 scripts/check-actionlint.mjs
 scripts/check-secrets.mjs
 scripts/report-licenses.mjs
@@ -426,6 +461,13 @@ docs/openapi.yaml
 tests/fixtures/*
 tests/snapshots/*
 src/app/docs-preview/*
+CHANGELOG.md
+version.txt
+release-please-config.json
+.release-please-manifest.json
+.github/copilot-instructions.md
+.cursor/rules/*
+CLAUDE.md
 ```
 
 ## Suggested Template Blueprint
@@ -437,6 +479,7 @@ For most future non-domain-specific starters, preserve this rough shape:
 - strong README
 - contributor guide
 - security policy
+- code of conduct and license for public templates
 - agent guidance
 - roadmap file
 
@@ -444,6 +487,7 @@ For most future non-domain-specific starters, preserve this rough shape:
 
 - root `dev`
 - root `check`
+- root `e2e` when real user journeys matter
 - focused helper scripts
 - reproducible screenshots or docs previews if there is UI
 
@@ -452,13 +496,14 @@ For most future non-domain-specific starters, preserve this rough shape:
 - workflow lint
 - secret scan
 - app, test, and build verification
+- browser E2E when the product story promises real workflows
 - platform-specific verification if relevant
 - dependency review
 - Docker or packaging check if deployable
 
 ### Release Layer
 
-- release drafter
+- release drafter or release-please
 - label sync
 - semver labeling rules
 - publish workflow
@@ -509,6 +554,8 @@ This is the minimum point where a repo starts feeling dependable.
 If you want the version that scales better for open source or long-term reuse, also add:
 
 - `AGENTS.md`
+- `CODE_OF_CONDUCT.md`
+- `LICENSE`
 - workflow lint
 - CodeQL
 - dependency review
@@ -558,6 +605,7 @@ These patterns are still generic even though the local implementation is CV-shap
 - generated files should have drift checks
 - local scripts and CI should use the same commands
 - published artifacts should get smoke-tested
+- repos with real user flows should have at least one browser E2E confidence path
 - workflows should be linted
 - secrets should be scanned
 - dependency changes should be reviewed on pull requests
@@ -566,6 +614,7 @@ These patterns are still generic even though the local implementation is CV-shap
 - published artifacts should have provenance attestations when the platform supports them
 - release notes should tell consumers how to verify what you published
 - release steps should be automated
+- release automation should have one explicit owner path such as release-please or release-drafter-plus-publish
 - docs should explain maintainer flow, not just user setup
 
 ## Good Default Questions For Any New Template
