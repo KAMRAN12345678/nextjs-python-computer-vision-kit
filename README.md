@@ -159,3 +159,11 @@ An SBOM workflow also publishes SPDX artifacts for the repository source plus th
 5. Split training and experimentation into a separate workspace later.
 
 The short public roadmap lives in [soon.md](./soon.md).
+
+## Repository Standards
+
+- [CONTRIBUTING.md](./CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
+- [LICENSE](./LICENSE)
+- [SECURITY.md](./SECURITY.md)
+- [template-playbook.md](./template-playbook.md)
