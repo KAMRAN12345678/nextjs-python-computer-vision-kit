@@ -112,6 +112,14 @@ The root check runs:
 
 `check:images` is separate and intended for environments where a Docker daemon is available.
 
+## Releases
+
+- Release Drafter keeps a draft release updated from merged pull requests on `main` and can auto-label incoming pull requests by path.
+- Path-based labels help sort PRs into frontend, backend, CI/CD, docs, and maintenance categories automatically.
+- Release Drafter defaults to a patch bump unless a maintainer applies `minor` or `major` to the pull request.
+- Pushing a tag like `v0.1.0` triggers the release workflow.
+- That workflow verifies the tagged commit, publishes backend/frontend images to GHCR, and creates a GitHub Release with generated notes.
+
 ## Contract Notes
 
 - `docs/openapi.yaml` is the source of truth for the HTTP contract.

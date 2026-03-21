@@ -93,3 +93,13 @@ If you modify request or response shapes:
 - Mention contract changes explicitly.
 - Include screenshots when UI behavior changes.
 - Add or update tests when backend behavior changes.
+
+## Maintainer Release Flow
+
+1. Merge pull requests into `main`.
+2. Let Release Drafter refresh the draft release and category buckets.
+3. Apply `minor` or `major` to a pull request when the default patch bump is not enough.
+4. Push a semver tag like `v0.1.0`.
+5. Wait for the release workflow to verify the repo, publish GHCR images, and create the GitHub Release.
+
+The component labels used by Release Drafter are synced from `.github/labels.json`, and most of the common ones are applied automatically from changed paths.
