@@ -155,6 +155,7 @@ An SBOM workflow also publishes SPDX artifacts for the repository source plus th
 5. Split training and experimentation into a separate workspace later.
 
 The short public roadmap lives in [soon.md](./soon.md).
+A sign-language adaptation roadmap for this template lives in [roadmap.md](./roadmap.md).
 
 ## Repository Standards
 
